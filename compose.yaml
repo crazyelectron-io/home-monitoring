@@ -14,7 +14,7 @@ services:
       - 9090:9090
     command: "--config.file=/etc/prometheus/prometheus.yaml"
     volumes:
-      - /mnt/data/appdata/prometheus/config:/etc/prometheus
+      - /mnt/data/appdata/prometheus/config/prometheus.yaml:/etc/prometheus/prometheus.yaml
       - /etc/komodo/stacks/home-monitoring/config:/setup
       - /mnt/data/appdata/prometheus:/prometheus
     restart: unless-stopped
