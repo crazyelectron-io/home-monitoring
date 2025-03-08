@@ -14,8 +14,8 @@ services:
       - 9090:9090
     command: "--config.file=/etc/prometheus/prometheus.yaml"
     volumes:
-      - /etc/komodo/stacks/home-monitoring/config:/etc/prometheus:ro
-      - /mnt/data/appdata/prometheus:/prometheus:rw
+      - /etc/komodo/stacks/home-monitoring/config:/etc/prometheus
+      - /mnt/data/appdata/prometheus:/prometheus
     restart: unless-stopped
     networks:
       - default
@@ -93,8 +93,8 @@ services:
     ports:
       - 3100:3100
     volumes:
-      - /etc/komodo/stacks/home-monitoring/config:/etc/loki:ro
-      - /mnt/data/appdata/loki/data:/loki:rw
+      - /etc/komodo/stacks/home-monitoring/config:/etc/loki
+      - /mnt/data/appdata/loki/data:/loki
     # labels:
     #   - "traefik.enable=true"
     #   - "traefik.http.routers.loki.entrypoints=https"
