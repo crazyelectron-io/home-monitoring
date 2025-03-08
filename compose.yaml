@@ -14,8 +14,7 @@ services:
       - 9090:9090
     command: "--config.file=/etc/prometheus/prometheus.yaml"
     volumes:
-      - ./config/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
-      # - /mnt/data/appdata/komodo/config/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
+      - /etc/komodo/stacks/home-monitoring/config/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
       - /mnt/data/appdata/prometheus:/prometheus:rw
     restart: unless-stopped
     networks:
@@ -63,7 +62,7 @@ services:
     image: grafana/alloy:latest
     container_name: alloy
     volumes:
-      - ./config/config.alloy:/etc/alloy/config.alloy
+      - /etc/komodo/stacks/home-monitoring/config/config.alloy:/etc/alloy/config.alloy
       - /var/log/journal:/var/log/journal:ro
       - /var/log/samba:/var/log/samba:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -94,7 +93,7 @@ services:
     ports:
       - 3100:3100
     volumes:
-      - /mnt/data/appdata/komodo/config/loki.yaml:/etc/loki/config.yaml:ro
+      - /etc/komodo/stacks/home-monitoring/config/loki.yaml:/etc/loki/config.yaml:ro
       - /mnt/data/appdata/loki/data:/loki:rw
     # labels:
     #   - "traefik.enable=true"
