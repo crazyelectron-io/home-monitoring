@@ -63,7 +63,7 @@ services:
     image: grafana/alloy:latest
     container_name: alloy
     volumes:
-      - /mnt/data/appdata/komodo/config/config.alloy:/etc/alloy/config.alloy
+      - ./config/config.alloy:/etc/alloy/config.alloy
       - /var/log/journal:/var/log/journal:ro
       - /var/log/samba:/var/log/samba:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
