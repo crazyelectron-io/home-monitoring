@@ -28,6 +28,7 @@ services:
       - "3080:3000"
     volumes:
       - /mnt/data/appdata/grafana:/var/lib/grafana
+    env_file: .env
     environment:
       GF_SERVER_ROOT_URL: "https://${GRAFANA_DOMAIN}"
       GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
@@ -37,6 +38,8 @@ services:
       GF_AUTH_GENERIC_OAUTH_TOKEN_URL: "https://${AUTHENTIK_DOMAIN}/application/o/token/"
       GF_AUTH_GENERIC_OAUTH_API_URL: "https://${AUTHENTIK_DOMAIN}/application/o/userinfo/"
       GF_AUTH_SIGNOUT_REDIRECT_URL: "https://${AUTHENTIK_DOMAIN}/application/o/grafana/end-session/"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID: "${GF_AUTH_GENERIC_OAUTH_CLIENT_ID}"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: "${GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}"
       GF_AUTH_GENERIC_OAUTH_TLS_SKIP_VERIFY_INSECURE: "true"
       # Optionally enable auto-login (bypasses Grafana login screen)
       GF_AUTH_OAUTH_AUTO_LOGIN: "true"
