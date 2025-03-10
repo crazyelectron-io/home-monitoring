@@ -93,7 +93,7 @@ services:
     ports:
       - 3100:3100
     volumes:
-      - /etc/komodo/stacks/home-monitoring/config:/etc/loki
+      - ./config:/etc/loki
       - /mnt/data/appdata/loki/data:/loki
     # labels:
     #   - "traefik.enable=true"
