@@ -18,7 +18,7 @@ services:
       - /mnt/data/appdata/prometheus:/prometheus
     restart: unless-stopped
     networks:
-      - default
+      - backend
 
   postgres-grafana:
     container_name: postgres-grafana
@@ -69,7 +69,7 @@ services:
       - postgres-grafana
     networks:
       - frontend
-      - default
+      - backend
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.entrypoints=http"
@@ -102,7 +102,7 @@ services:
     restart: unless-stopped
     networks:
       - frontend
-      - default
+      - backend
     privileged: true
     cap_add:
       - SYS_PTRACE
@@ -129,7 +129,7 @@ services:
       # - "traefik.http.routers.loki.middlewares=authentik@file"
     restart: unless-stopped
     networks:
-      - default
+      - backend
       # - frontend
 
   node_exporter:
@@ -154,7 +154,9 @@ services:
       - SYS_PTRACE
     security_opt:
       - seccomp:unconfined
-    
+    networks:
+      - backend
+
   cadvisor:
     image: gcr.io/cadvisor/cadvisor
     container_name: cadvisor
@@ -169,7 +171,11 @@ services:
     devices:
       - /dev/kmsg:/dev/kmsg
     privileged: true
+    networks:
+      - backend
 
 networks:
   frontend:
+    external: true
+  backend:
     external: true
